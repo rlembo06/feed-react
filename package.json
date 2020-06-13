@@ -2,7 +2,6 @@
   "name": "hr-test-react",
   "private": true,
   "dependencies": {
-    "@material-ui/core": "^4.10.2",
     "@redux-saga/core": "^1.1.3",
     "@reduxjs/toolkit": "^1.3.6",
     "axios": "^0.19.2",
@@ -14,7 +13,8 @@
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
     "redux-saga": "^1.1.3",
-    "saga": "^4.0.0-alpha"
+    "saga": "^4.0.0-alpha",
+    "styled-components": "^5.1.1"
   },
   "scripts": {
     "start": "react-scripts start",
