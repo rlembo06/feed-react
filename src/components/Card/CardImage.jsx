@@ -1,6 +1,7 @@
 import React  from "react";
 import styled from "styled-components";
 import colors from 'constants/colors.constant';
+import DefaultImage from 'components/Card/DefaultImage.svg'
 
 const CardImageContainer = styled.div`
     overflow: hidden;
@@ -19,13 +20,13 @@ const CardImageResource = styled.img`
     height: auto;
 `;
 
-const CardImage = ({ src, rounded, alt, width, border }) => (
-    <CardImageContainer>
-        <CardImageResource src={src || './images/walking.png'}
+const CardImage = ({ src, rounded, alt, width, size, border }) => (
+    <CardImageContainer border={border}
+                        rounded={rounded}
+                        size={size}>
+        <CardImageResource src={src || DefaultImage}
                            width={width}
-                           border={border}
-                           rounded={rounded}
-                           alt={alt} />
+                           alt={alt || '...'} />
     </CardImageContainer>
 );
 
