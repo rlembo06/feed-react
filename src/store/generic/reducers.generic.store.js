@@ -1,4 +1,4 @@
-import GenericActions from "./actions.generic.store";
+import { GenericActions } from 'store/generic';
 
 /**
  * Mutations for set state in store, run by actions

@@ -13,7 +13,8 @@
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
     "redux-saga": "^1.1.3",
-    "saga": "^4.0.0-alpha"
+    "saga": "^4.0.0-alpha",
+    "styled-components": "^5.1.1"
   },
   "scripts": {
     "start": "react-scripts start",

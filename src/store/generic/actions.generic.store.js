@@ -1,5 +1,5 @@
 import { createAction } from '@reduxjs/toolkit';
-import genericEvents from './events.generic.store';
+import genericEvents from 'store/generic/events.generic.store';
 
 /**
  * - Dispatch: Dispatch these actions from components or from workflow.

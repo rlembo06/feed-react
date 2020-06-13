@@ -1,4 +1,4 @@
-import RequestInstance from './request-instance';
+import RequestInstance from 'api/request-instance';
 import querystring from 'qs';
 
 export default class GenericApi {
