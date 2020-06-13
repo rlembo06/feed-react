@@ -1,7 +1,7 @@
 import styled  from 'styled-components';
 import colors from 'constants/colors.constant';
 
-export const Card = styled.div`
+const Card = styled.div`
     overflow: hidden;
     padding: 10px;
     margin: 10px;
@@ -13,3 +13,5 @@ export const Card = styled.div`
     background-color: ${props => (props && props.backgroundColor) || colors.BLUE_LIGHT};
     color: ${props => (props && props.color) || colors.GREY_DARK};
 `;
+
+export default Card;

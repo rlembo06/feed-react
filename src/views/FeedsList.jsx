@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 const FeedsListContainer = styled.div`
     width: 100%;
+    margin: auto;
     display: flex;
     align-items: center;
     justify-content: center;

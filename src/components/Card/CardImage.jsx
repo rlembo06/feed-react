@@ -1,15 +1,32 @@
-import styled  from 'styled-components';
+import React  from "react";
+import styled from "styled-components";
 import colors from 'constants/colors.constant';
 
-export const CardImage = styled.div`
+const CardImageContainer = styled.div`
     overflow: hidden;
-    padding: 10px;
-    margin: 10px;
-    width: 90%;
-    -webkit-box-shadow: 5px 8px 7px 2px rgba(0,0,0,0.25);
-    -moz-box-shadow: 5px 8px 7px 2px rgba(0,0,0,0.25);
-    box-shadow: 5px 8px 7px 2px rgba(0,0,0,0.25);
-    border-radius: 10px;
-    background-color: ${props => (props && props.backgroundColor) || colors.BLUE_LIGHT};
-    color: ${props => (props && props.color) || colors.GREY_DARK};
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: ${props => (props && props.border) || `2px solid ${colors.GREY_LIGHT}`};
+    height: ${props => (props && props.size) || '50px'};
+    width: ${props => (props && props.size) || '50px'};
+    border-radius: ${props => (props && props.rounded) || '50%'};
 `;
+
+const CardImageResource = styled.img`
+    width: ${props => (props && props.width) || '100%'};
+    height: auto;
+`;
+
+const CardImage = ({ src, rounded, alt, width, border }) => (
+    <CardImageContainer>
+        <CardImageResource src={src || './images/walking.png'}
+                           width={width}
+                           border={border}
+                           rounded={rounded}
+                           alt={alt} />
+    </CardImageContainer>
+);
+
+export default CardImage;

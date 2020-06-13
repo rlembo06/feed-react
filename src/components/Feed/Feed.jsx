@@ -1,8 +1,11 @@
 import React from "react";
-import { Card } from "../Card/Card";
+import { Card, CardImage, CardContent } from "components/Card";
 
 export default function Feed() {
     return (
-        <Card>Feed</Card>
+        <Card>
+            <CardImage />
+            <CardContent>Feed</CardContent>
+        </Card>
     )
 }
