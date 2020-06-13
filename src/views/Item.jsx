@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from 'react-redux'
-import ActionsGenericStore from '../store/generic/actions.generic.store'
+import ActionsGenericStore from 'store/generic/actions.generic.store'
 
 const usersActions = new ActionsGenericStore('users');
 

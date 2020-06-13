@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import GenericModelState from "./state.generic.store";
+import { GenericModelState } from 'store/generic';
 
 /**
  * Generic Module class for keep structure data in store.

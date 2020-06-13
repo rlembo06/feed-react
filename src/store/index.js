@@ -1,12 +1,12 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension'
 import createSagaMiddleware from 'redux-saga';
-import rootWorkflow from "./rootWorkflow";
-import Apis from '../api/modules';
+import rootWorkflow from 'store/rootWorkflow';
+import Apis from 'api/modules';
 
 // importations of modules :
 import { GenericModule } from './generic';
-import { GenericModelState, GenericReducers, GenericActions } from './generic';
+import { GenericModelState, GenericReducers, GenericActions } from 'store/generic';
 
 const rootReducer = combineReducers({
     users: new GenericModule('users', new GenericModelState(), new GenericReducers('users', GenericActions)).getReducers(),

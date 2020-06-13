@@ -1,6 +1,6 @@
 import { all, takeLatest, call, put } from "@redux-saga/core/effects";
-import GenericActions from "./actions.generic.store";
-import { camelToSnake } from '../../helpers/stringConverters.helper';
+import { GenericActions } from 'store/generic';
+import { camelToSnake } from 'helpers/stringConverters.helper';
 
 /**
  * Class for create generators.

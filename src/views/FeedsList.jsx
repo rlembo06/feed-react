@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Feed from "../components/Feed/Feed";
+import Feed from "components/Feed/Feed";
 import styled from "styled-components";
 
 const FeedsListContainer = styled.div`

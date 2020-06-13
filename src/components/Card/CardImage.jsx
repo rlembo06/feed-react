@@ -1,7 +1,7 @@
 import styled  from 'styled-components';
 import colors from 'constants/colors.constant';
 
-export const Card = styled.div`
+export const CardImage = styled.div`
     overflow: hidden;
     padding: 10px;
     margin: 10px;
