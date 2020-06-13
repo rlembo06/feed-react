@@ -2,10 +2,18 @@
   "name": "hr-test-react",
   "private": true,
   "dependencies": {
+    "@redux-saga/core": "^1.1.3",
+    "@reduxjs/toolkit": "^1.3.6",
+    "axios": "^0.19.2",
+    "qs": "^6.9.4",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-redux": "^7.2.0",
     "react-scripts": "2.1.8",
-    "redux": "^4.0.5"
+    "redux": "^4.0.5",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-saga": "^1.1.3",
+    "saga": "^4.0.0-alpha"
   },
   "scripts": {
     "start": "react-scripts start",
