@@ -1,5 +1,5 @@
-import mocks from 'api/modules/mocks';
+import FeedsApi from 'api/modules/feeds.module.api';
 
 export default class Apis {
-    users = mocks;
+    feeds = new FeedsApi();
 }

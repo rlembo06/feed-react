@@ -26,9 +26,13 @@ export default class WorkflowGenericStore {
 
      getAll = function* (moduleName, api) {
         const actions = new GenericActions(moduleName);
-        const response = yield call(api.users.getAll);
-        if(response) {
-            yield put(actions.SET_LIST(response));
+        const response = yield call(api[moduleName].getAll);
+        if(response && response.data && response.data.results && response.data.metaData) {
+            const { results: data, metaData } = response.data;
+            yield put(actions.SET_LIST({
+                data,
+                metaData,
+            }));
         }
      };
 

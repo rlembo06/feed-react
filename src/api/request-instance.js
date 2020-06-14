@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-const { BASE_API_URL } = process.env;
+const { REACT_APP_BASE_API_URL } = process.env;
 
 export default class RequestInstance {
     static instance = axios.create({
-        baseURL: BASE_API_URL || 'http://localhost:1337',
+        baseURL: REACT_APP_BASE_API_URL || 'http://localhost:1337',
         timeout: 10000,
     });
 

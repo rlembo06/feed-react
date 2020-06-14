@@ -34,9 +34,22 @@ export default class GenericReducers {
                 list: []
             }),
 
+            [actions.GET_ALL.type]: state => ({
+                ...state,
+                list: {
+                    ...state.list,
+                    isFetching: true,
+                }
+            }),
+
             [actions.SET_LIST.type]: (state, action) => ({
                 ...state,
-                list: action.payload
+                list: {
+                    ...state.list,
+                    data: action.payload.data || [],
+                    metaData: action.payload.metaData || null,
+                    isFetching: false,
+                }
             }),
         })
     }
