@@ -6,6 +6,9 @@ import CreditIcon from 'components/Feed/CreditIcon.svg';
 import PointIcon from 'components/Feed/PointIcon.svg';
 import PropTypes from 'prop-types';
 
+/**
+ * In order to separate and aligned point and credit in Feed
+ */
 const FeedScoresGrid = styled(Grid)`
     text-align: center;
     width: 100%;
@@ -14,6 +17,12 @@ const FeedScoresGrid = styled(Grid)`
     justify-content: center;
 `;
 
+/**
+ * Component for get icon for credit or point Feed
+ * @param src Icon source
+ * @returns {*}
+ * @constructor
+ */
 const FeedScoresIcon = ({ src }) =>
     <CardImage  src={src}
                 width="20px"
@@ -24,6 +33,13 @@ FeedScoresIcon.propTypes = {
     src: PropTypes.string,
 };
 
+/**
+ * Component containing points and credits for the Feed Component
+ * @param points Points earned through the activity.
+ * @param credits Corresponding credits (1 credit = 5 points)
+ * @returns {*}
+ * @constructor
+ */
 const FeedScores = ({ points, credits }) => {
     return (
         <Row>

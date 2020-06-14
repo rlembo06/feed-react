@@ -4,6 +4,9 @@ import colors from 'constants/colors.constant';
 import DefaultImage from 'components/Card/DefaultImage.svg'
 import PropTypes from 'prop-types';
 
+/**
+ * Wrapper component of the image
+ */
 const CardImageContainer = styled.div`
     overflow: hidden;
     position: relative;
@@ -28,6 +31,9 @@ CardImageContainer.defaultProps = {
     rounded: '50%',
 };
 
+/**
+ * Styled-component containing src attribute
+ */
 const CardImageResource = styled.img`
     width: ${ props => props && props.width };
     height: auto;
@@ -41,6 +47,17 @@ CardImageResource.defaultProps = {
     width: '100%',
 };
 
+/**
+ * Component for get image or icon in Card
+ * @param src Image / icon source
+ * @param rounded For rounded corner, data in percent
+ * @param alt Image description
+ * @param width Image Width
+ * @param size Image container size
+ * @param border Image border, CSS rule
+ * @returns {*}
+ * @constructor
+ */
 const CardImage = ({ src, rounded, alt, width, size, border }) => (
     <CardImageContainer border={border}
                         rounded={rounded}

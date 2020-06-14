@@ -2,6 +2,9 @@ import styled  from 'styled-components';
 import colors from 'constants/colors.constant';
 import PropTypes from 'prop-types';
 
+/**
+ * Component for containing some data
+ */
 const Card = styled.div`
     overflow: hidden;
     padding: 10px;
