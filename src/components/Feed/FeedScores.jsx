@@ -2,8 +2,8 @@ import React  from "react";
 import { Col, Row, Grid } from "components/Grid";
 import { CardImage } from "components/Card";
 import styled from "styled-components";
-import CreditIcon from 'components/Feed/CreditIcon.svg';
-import PointIcon from 'components/Feed/PointIcon.svg';
+import CreditIcon from 'components/Feed/PointIcon.svg';
+import PointIcon from 'components/Feed/CreditIcon.svg';
 import PropTypes from 'prop-types';
 
 /**
@@ -40,13 +40,14 @@ FeedScoresIcon.propTypes = {
  * @returns {*}
  * @constructor
  */
-const FeedScores = ({ points, credits }) => {
+const FeedScores = ({ points }) => {
+    const credits = points ? Math.round(points / 5) : 0;
     return (
         <Row>
             <Col size={1}>
                 <FeedScoresGrid>
                     <Col>
-                        {points}
+                        {credits}
                     </Col>
                     <Col>
                         <FeedScoresIcon src={PointIcon} />
@@ -56,7 +57,7 @@ const FeedScores = ({ points, credits }) => {
             <Col size={1}>
                 <FeedScoresGrid>
                     <Col>
-                        {credits}
+                        {points}
                     </Col>
                     <Col>
                         <FeedScoresIcon src={CreditIcon} />

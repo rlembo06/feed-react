@@ -38,7 +38,7 @@ const FeedValue = styled.div`
  * @returns {*}
  * @constructor
  */
-const Feed = ({ icon, type, value, points, credits }) => (
+const Feed = ({ icon, type, value, points }) => (
     <Card>
         <Row>
             <Col size={1}>
@@ -55,7 +55,7 @@ const Feed = ({ icon, type, value, points, credits }) => (
                 </CardContent>
             </Col>
             <Col size={1}>
-                <FeedScores points={points} credits={credits} />
+                <FeedScores points={points} />
             </Col>
         </Row>
     </Card>
@@ -64,7 +64,7 @@ const Feed = ({ icon, type, value, points, credits }) => (
 Feed.propTypes = {
     icon: PropTypes.string,
     type: PropTypes.string,
-    value: PropTypes.string,
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     points: PropTypes.number,
     credits: PropTypes.number,
 };

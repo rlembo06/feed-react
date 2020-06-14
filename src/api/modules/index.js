@@ -1,5 +1,5 @@
-import ActivitiesApi from 'api/modules/activities.module.api';
+import FeedsApi from 'api/modules/feeds.module.api';
 
 export default class Apis {
-    activities = new ActivitiesApi();
+    feeds = new FeedsApi();
 }

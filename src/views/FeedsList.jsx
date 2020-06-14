@@ -1,11 +1,13 @@
-import React, { Component } from "react";
+import React, { Component, Suspense } from "react";
 import { connect } from 'react-redux'
 import ActionsGenericStore from 'store/generic/actions.generic.store'
 
 import Feed from "components/Feed/Feed";
 import styled from "styled-components";
+import { Col, Row } from "components/Grid";
+import Loading from "components/Loading/Loading";
 
-const activitiesActions = new ActionsGenericStore('activities');
+const feedsActions = new ActionsGenericStore('feeds');
 
 const FeedsListContainer = styled.div`
     width: 100%;
@@ -17,26 +19,37 @@ const FeedsListContainer = styled.div`
 
 class FeedsList extends Component {
     componentDidMount() {
-        const { getAllActivities } = this.props;
-        getAllActivities();
+        const { getAllFeeds } = this.props;
+        getAllFeeds();
     }
 
     render() {
-        const { activitiesList } = this.props;
+        const { feedsList: { data } } = this.props;
         return (
-            <FeedsListContainer>
-                <Feed />
-            </FeedsListContainer>
+            <Suspense fallback={ <Loading /> }>
+                <FeedsListContainer>
+                    <Col size={1}>
+                        {data && data.length > 0 && data.map((feed, key) => (
+                            <Row key={`row-feed-${key}`}>
+                                <Feed type={feed && feed.type}
+                                      value={feed && feed.steps}
+                                      points={feed && feed.points} />
+                            </Row>
+                        ))}
+                    </Col>
+                </FeedsListContainer>
+            </Suspense>
         )
+
     }
 }
 
 const mapStateToProps = state => ({
-    activitiesList: state.activities.list
+    feedsList: state.feeds.list
 });
 
 const mapDispatchToProps = dispatch => ({
-    getAllActivities: payload => dispatch(activitiesActions.GET_ALL(payload)),
+    getAllFeeds: payload => dispatch(feedsActions.GET_ALL(payload)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(FeedsList)

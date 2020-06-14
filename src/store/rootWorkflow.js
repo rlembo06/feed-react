@@ -4,7 +4,7 @@ import { GenericWorkflow } from 'store/generic';
 
 export default function* (apis) {
     const usersWorkflows = new GenericWorkflow('users').runWorkflow;
-    const activitiesWorkflows = new GenericWorkflow('activities').runWorkflow;
+    const activitiesWorkflows = new GenericWorkflow('feeds').runWorkflow;
 
     yield all([
         spawn(usersWorkflows(apis)),
