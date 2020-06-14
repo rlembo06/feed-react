@@ -1,11 +1,12 @@
-import React, { Component, Suspense } from "react";
+import React, { Component, Suspense, lazy } from "react";
 import { connect } from 'react-redux'
 import ActionsGenericStore from 'store/generic/actions.generic.store'
 
-import Feed from "components/Feed/Feed";
 import styled from "styled-components";
 import { Col, Row } from "components/Grid";
 import Loading from "components/Loading/Loading";
+
+const Feed = lazy(() => import("components/Feed/Feed"));
 
 const feedsActions = new ActionsGenericStore('feeds');
 
@@ -24,23 +25,31 @@ class FeedsList extends Component {
     }
 
     render() {
-        const { feedsList: { data } } = this.props;
+        const { feedsList: { data, isFetching } } = this.props;
         return (
             <Suspense fallback={ <Loading /> }>
-                <FeedsListContainer>
-                    <Col size={1}>
-                        {data && data.length > 0 && data.map((feed, key) => (
-                            <Row key={`row-feed-${key}`}>
-                                <Feed type={feed && feed.type}
-                                      value={feed && feed.steps}
-                                      points={feed && feed.points} />
-                            </Row>
-                        ))}
-                    </Col>
-                </FeedsListContainer>
+                {isFetching
+                    ? <Loading />
+                    : (
+                        <Suspense fallback={ <Loading /> }>
+                            <FeedsListContainer>
+                                { data && data.length > 0 ? (
+                                    <Col size={1}>
+                                        {data.map((feed, key) => (
+                                            <Row key={`row-feed-${key}`}>
+                                                <Feed type={feed && feed.type}
+                                                      value={feed && feed.steps}
+                                                      points={feed && feed.points} />
+                                            </Row>
+                                        ))}
+                                    </Col>
+                                ) : <p>No data</p> }
+                            </FeedsListContainer>
+                        </Suspense>
+                    )
+                }
             </Suspense>
         )
-
     }
 }
 

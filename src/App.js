@@ -1,6 +1,6 @@
 import React from 'react';
 
-import FeedsList from "./views/FeedsList";
+import FeedsList from "views/FeedsList";
 
 // URL: ${API_URL}/v3/users/5411bab0c8e1e7656f4ff291/activities
 // Method: GET
