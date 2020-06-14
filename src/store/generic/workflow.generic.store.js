@@ -25,7 +25,6 @@ export default class WorkflowGenericStore {
      };
 
      getAll = function* (moduleName, api) {
-        console.log('GENERIC getAll');
         const actions = new GenericActions(moduleName);
         const response = yield call(api.users.getAll);
         if(response) {
