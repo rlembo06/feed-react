@@ -1,5 +1,5 @@
-import mocks from 'api/modules/mocks';
+import ActivitiesApi from 'api/modules/activities.module.api';
 
 export default class Apis {
-    users = mocks;
+    activities = new ActivitiesApi();
 }

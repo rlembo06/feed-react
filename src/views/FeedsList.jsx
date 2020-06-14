@@ -1,6 +1,11 @@
 import React, { Component } from "react";
+import { connect } from 'react-redux'
+import ActionsGenericStore from 'store/generic/actions.generic.store'
+
 import Feed from "components/Feed/Feed";
 import styled from "styled-components";
+
+const activitiesActions = new ActionsGenericStore('activities');
 
 const FeedsListContainer = styled.div`
     width: 100%;
@@ -10,8 +15,14 @@ const FeedsListContainer = styled.div`
     justify-content: center;
 `;
 
-export default class FeedsList extends Component {
+class FeedsList extends Component {
+    componentDidMount() {
+        const { getAllActivities } = this.props;
+        getAllActivities();
+    }
+
     render() {
+        const { activitiesList } = this.props;
         return (
             <FeedsListContainer>
                 <Feed />
@@ -19,3 +30,13 @@ export default class FeedsList extends Component {
         )
     }
 }
+
+const mapStateToProps = state => ({
+    activitiesList: state.activities.list
+});
+
+const mapDispatchToProps = dispatch => ({
+    getAllActivities: payload => dispatch(activitiesActions.GET_ALL(payload)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(FeedsList)

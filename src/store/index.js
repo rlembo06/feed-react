@@ -9,7 +9,7 @@ import { GenericModule } from './generic';
 import { GenericModelState, GenericReducers, GenericActions } from 'store/generic';
 
 const rootReducer = combineReducers({
-    users: new GenericModule('users', new GenericModelState(), new GenericReducers('users', GenericActions)).getReducers(),
+    activities: new GenericModule('activities', new GenericModelState(), new GenericReducers('activities', GenericActions)).getReducers(),
 });
 
 const sagaMiddleware = createSagaMiddleware();
