@@ -2,11 +2,16 @@ import React from "react";
 import { Card, CardImage, CardContent } from "components/Card";
 import { Col, Row } from 'components/Grid';
 import FeedScores from "components/Feed/FeedScores";
+import PropTypes from 'prop-types';
 
 const FeedImage = ({ src }) =>
     <CardImage  src={src}
                 rounded="0px"
                 border="inherit" />;
+
+FeedImage.propTypes = {
+    src: PropTypes.string,
+};
 
 export default function Feed() {
     return (

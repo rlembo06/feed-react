@@ -2,6 +2,7 @@ import React  from "react";
 import styled from "styled-components";
 import colors from 'constants/colors.constant';
 import DefaultImage from 'components/Card/DefaultImage.svg'
+import PropTypes from 'prop-types';
 
 const CardImageContainer = styled.div`
     overflow: hidden;
@@ -9,25 +10,58 @@ const CardImageContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    border: ${props => (props && props.border) || `2px solid ${colors.GREY_LIGHT}`};
-    height: ${props => (props && props.size) || '50px'};
-    width: ${props => (props && props.size) || '50px'};
-    border-radius: ${props => (props && props.rounded) || '50%'};
+    border: ${ props => props && props.border };
+    height: ${ props => props && props.size };
+    width: ${ props => props && props.size };
+    border-radius: ${ props => props && props.rounded };
 `;
 
+CardImageContainer.propTypes = {
+    border: PropTypes.string,
+    size: PropTypes.string,
+    rounded: PropTypes.string,
+};
+
+CardImageContainer.defaultProps = {
+    border: `2px solid ${colors.GREY_LIGHT}`,
+    size: '50px',
+    rounded: '50%',
+};
+
 const CardImageResource = styled.img`
-    width: ${props => (props && props.width) || '100%'};
+    width: ${ props => props && props.width };
     height: auto;
 `;
+
+CardImageResource.propTypes = {
+    width: PropTypes.string,
+};
+
+CardImageResource.defaultProps = {
+    width: '100%',
+};
 
 const CardImage = ({ src, rounded, alt, width, size, border }) => (
     <CardImageContainer border={border}
                         rounded={rounded}
                         size={size}>
-        <CardImageResource src={src || DefaultImage}
+        <CardImageResource src={src}
                            width={width}
                            alt={alt || '...'} />
     </CardImageContainer>
 );
+
+CardImage.propTypes = {
+    src: PropTypes.string,
+    rounded: PropTypes.string,
+    alt: PropTypes.string,
+    width: PropTypes.string,
+    size: PropTypes.string,
+    border: PropTypes.string,
+};
+
+CardImage.defaultProps = {
+    src: DefaultImage,
+};
 
 export default CardImage;
