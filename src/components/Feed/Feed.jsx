@@ -5,7 +5,8 @@ import FeedScores from "components/Feed/FeedScores";
 import PropTypes from 'prop-types';
 import styled from "styled-components";
 import colors from 'constants/colors.constant';
-import { feedIcons, feedTypes } from 'constants/feed.constant';
+import { feedIcons, feedNames } from 'constants/feed.constant';
+import { getFeedValueByType } from 'helpers/feedValueConverters.helper';
 
 /**
  * Component for get image or icon in Feed
@@ -38,9 +39,10 @@ const FeedValue = styled.div`
  * @returns {*}
  * @constructor
  */
-const Feed = ({ type, value, points }) => {
+const Feed = ({ feed: { type, value, points }, feed }) => {
     const icon = type && feedIcons[type.toUpperCase()];
-    const title = type && feedTypes[type.toUpperCase()];
+    const title = type && feedNames[type.toUpperCase()];
+    const valueParsed = getFeedValueByType(feed);
     return (
         <Card>
             <Row>
@@ -53,7 +55,7 @@ const Feed = ({ type, value, points }) => {
                             <b>{title}</b>
                         </Row>
                         <Row>
-                            <FeedValue>{value}</FeedValue>
+                            <FeedValue>{valueParsed}</FeedValue>
                         </Row>
                     </CardContent>
                 </Col>

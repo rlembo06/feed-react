@@ -1,7 +1,13 @@
 export const feedTypes = {
-    WALKING: 'Walking',
-    CYCLING: 'Cycling',
-    RUNNING: 'Running',
+    WALKING: 'WALKING',
+    CYCLING: 'CYCLING',
+    RUNNING: 'RUNNING',
+};
+
+export const feedNames = {
+    WALKING: 'Marche',
+    CYCLING: 'Vélo',
+    RUNNING: 'Course',
 };
 
 export const feedIcons = {
@@ -10,3 +16,10 @@ export const feedIcons = {
     RUNNING: './images/running.png',
 };
 
+export const feedUnits = {
+    STEPS: 'pas',
+    KM: 'km',
+    H: 'h',
+    MIN: 'min',
+    SEC: 'sec'
+};

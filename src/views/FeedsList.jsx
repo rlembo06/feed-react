@@ -37,9 +37,7 @@ class FeedsList extends Component {
                                     <Col size={1}>
                                         {data.map((feed, key) => (
                                             <Row key={`row-feed-${key}`}>
-                                                <Feed type={feed && feed.type}
-                                                      value={feed && feed.steps}
-                                                      points={feed && feed.points} />
+                                                <Feed feed={feed} />
                                             </Row>
                                         ))}
                                     </Col>
