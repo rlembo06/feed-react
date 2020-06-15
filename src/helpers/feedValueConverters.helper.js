@@ -1,3 +1,5 @@
+import _ from 'lodash';
+import moment from 'moment';
 import { feedTypes, feedUnits } from 'constants/feed.constant';
 
 const convertSeconds = value => {
@@ -28,3 +30,14 @@ export const getFeedValueByType = feed => {
         }
     }
 };
+
+export const groupFeedByDay = feeds => {
+    if(feeds && feeds.length > 0) {
+        return _.groupBy(feeds, feed => {
+            return moment(feed.date).startOf('day').format();
+        });
+    }
+};
+
+export const convertDate = date =>
+    !!date && moment(date).format('DD / MM / YYYY');

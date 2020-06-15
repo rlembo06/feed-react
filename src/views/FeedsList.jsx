@@ -5,6 +5,7 @@ import ActionsGenericStore from 'store/generic/actions.generic.store'
 import styled from "styled-components";
 import { Col, Row } from "components/Grid";
 import Loading from "components/Loading/Loading";
+import { groupFeedByDay, convertDate } from 'helpers/feedValueConverters.helper';
 
 const Feed = lazy(() => import("components/Feed/Feed"));
 
@@ -26,6 +27,7 @@ class FeedsList extends Component {
 
     render() {
         const { feedsList: { data, isFetching } } = this.props;
+        const feedsGroupByDay = groupFeedByDay(data);
         return (
             <Suspense fallback={ <Loading /> }>
                 {isFetching
@@ -35,10 +37,19 @@ class FeedsList extends Component {
                             <FeedsListContainer>
                                 { data && data.length > 0 ? (
                                     <Col size={1}>
-                                        {data.map((feed, key) => (
-                                            <Row key={`row-feed-${key}`}>
-                                                <Feed feed={feed} />
-                                            </Row>
+                                        { feedsGroupByDay &&
+                                          Object.entries(feedsGroupByDay).length > 0 &&
+                                          Object.entries(feedsGroupByDay).map(([date, group], kGroup) => (
+                                                <Col key={`col-group-${kGroup}`}>
+                                                    <>
+                                                        <p>{date && convertDate(date)}</p>
+                                                        {group.map((feed, kFeed) => (
+                                                            <Row key={`row-group-${kFeed}`}>
+                                                                <Feed feed={feed} />
+                                                            </Row>
+                                                        ))}
+                                                    </>
+                                                </Col>
                                         ))}
                                     </Col>
                                 ) : <p>No data</p> }
