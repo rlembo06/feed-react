@@ -5,6 +5,7 @@ import FeedScores from "components/Feed/FeedScores";
 import PropTypes from 'prop-types';
 import styled from "styled-components";
 import colors from 'constants/colors.constant';
+import { feedIcons, feedTypes } from 'constants/feed.constant';
 
 /**
  * Component for get image or icon in Feed
@@ -30,7 +31,6 @@ const FeedValue = styled.div`
 
 /**
  * Component used as Feed item
- * @param icon Image / icon source
  * @param type Type feed as title
  * @param value Value feed, like distance or time
  * @param points Points earned through the activity.
@@ -38,28 +38,32 @@ const FeedValue = styled.div`
  * @returns {*}
  * @constructor
  */
-const Feed = ({ icon, type, value, points }) => (
-    <Card>
-        <Row>
-            <Col size={1}>
-                <FeedImage src={icon} />
-            </Col>
-            <Col size={4}>
-                <CardContent>
-                    <Row>
-                        <b>{type}</b>
-                    </Row>
-                    <Row>
-                        <FeedValue>{value}</FeedValue>
-                    </Row>
-                </CardContent>
-            </Col>
-            <Col size={1}>
-                <FeedScores points={points} />
-            </Col>
-        </Row>
-    </Card>
-);
+const Feed = ({ type, value, points }) => {
+    const icon = type && feedIcons[type.toUpperCase()];
+    const title = type && feedTypes[type.toUpperCase()];
+    return (
+        <Card>
+            <Row>
+                <Col size={1}>
+                    <FeedImage src={icon} />
+                </Col>
+                <Col size={4}>
+                    <CardContent>
+                        <Row>
+                            <b>{title}</b>
+                        </Row>
+                        <Row>
+                            <FeedValue>{value}</FeedValue>
+                        </Row>
+                    </CardContent>
+                </Col>
+                <Col size={1}>
+                    <FeedScores points={points} />
+                </Col>
+            </Row>
+        </Card>
+    );
+};
 
 Feed.propTypes = {
     icon: PropTypes.string,

@@ -9,7 +9,7 @@ const Card = styled.div`
     overflow: hidden;
     padding: 10px;
     margin: 10px;
-    width: 90%;
+    width: 100%;
     -webkit-box-shadow: 5px 8px 7px 2px rgba(0,0,0,0.25);
     -moz-box-shadow: 5px 8px 7px 2px rgba(0,0,0,0.25);
     box-shadow: 5px 8px 7px 2px rgba(0,0,0,0.25);
