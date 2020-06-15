@@ -21,5 +21,7 @@ export const feedUnits = {
     KM: 'km',
     H: 'h',
     MIN: 'min',
-    SEC: 'sec'
+    SEC: 'sec',
+    TODAY: `Aujourd'hui`,
+    YESTERDAY: 'Hier',
 };

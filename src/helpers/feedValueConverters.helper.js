@@ -39,5 +39,28 @@ export const groupFeedByDay = feeds => {
     }
 };
 
-export const convertDate = date =>
-    !!date && moment(date).format('DD / MM / YYYY');
+export const convertDate = value => {
+    if(!!value) {
+        const instanceDate = new Date(value);
+        const dayOfDate = instanceDate.getDate();
+        const monthOfDate = instanceDate.getMonth();
+        const yearOfDate = instanceDate.getFullYear();
+
+        const instanceToday = new Date();
+        const dayOfToday = instanceToday.getDate();
+        const monthOfToday = instanceToday.getMonth();
+        const yearOfToday = instanceToday.getFullYear();
+
+        if( dayOfToday === dayOfDate &&
+            monthOfToday === monthOfDate &&
+            yearOfToday === yearOfDate ) {
+            return feedUnits.TODAY;
+        }
+        if( dayOfToday - dayOfDate === 1 &&
+            monthOfToday === monthOfDate &&
+            yearOfToday === yearOfDate ) {
+            return feedUnits.YESTERDAY;
+        }
+        return `${dayOfDate} / ${monthOfDate} / ${yearOfDate}`
+    }
+};
