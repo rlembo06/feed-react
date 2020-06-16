@@ -1,6 +1,6 @@
 import React from 'react';
 
-import FeedsList from "views/FeedsList";
+import FeedsView from "views/FeedsView";
 
 // URL: ${API_URL}/v3/users/5411bab0c8e1e7656f4ff291/activities
 // Method: GET
@@ -15,7 +15,7 @@ import FeedsList from "views/FeedsList";
 
 const App = () => (
   <div className="App">
-      <FeedsList />
+      <FeedsView />
   </div>
 );
 
