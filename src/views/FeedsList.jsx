@@ -91,7 +91,6 @@ class FeedsList extends Component {
 
     render() {
         const { feedsList: { data, isFetching } } = this.props;
-
         return (
             <Suspense fallback={ <Loading /> }>
                 {isFetching
