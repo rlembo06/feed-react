@@ -25,7 +25,7 @@ class FeedsView extends Component {
         return () => window.removeEventListener('scroll', handleScroll);
     }
 
-    componentDidUpdate(prevProps) {
+    componentDidUpdate() {
         const { handleLoadingInBottom } = this;
         handleLoadingInBottom();
     }
@@ -61,7 +61,7 @@ class FeedsView extends Component {
                         <Suspense fallback={ <Loading /> }>
                             <>
                                 <FeedsList data={data} />
-                                { isLoadNewData && <Loading atBottom={true} /> }
+                                { isLoadNewData && <Loading atBottom /> }
                             </>
                         </Suspense>
                     )
