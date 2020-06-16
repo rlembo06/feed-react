@@ -10,6 +10,7 @@ export default class GenericActions {
         this._GET_BY_ID = createAction(genericEvents(moduleName).GET_BY_ID);
         this._GET_ALL = createAction(genericEvents(moduleName).GET_ALL);
         this._SET_LIST = createAction(genericEvents(moduleName).SET_LIST);
+        this._ADD_IN_LIST = createAction(genericEvents(moduleName).ADD_IN_LIST);
         this._ADD = createAction(genericEvents(moduleName).ADD);
         this._REMOVE = createAction(genericEvents(moduleName).REMOVE);
         this._CLEAR = createAction(genericEvents(moduleName).CLEAR);
@@ -61,5 +62,13 @@ export default class GenericActions {
 
     set CLEAR(value) {
         this._CLEAR = value;
+    }
+
+    get ADD_IN_LIST() {
+        return this._ADD_IN_LIST;
+    }
+
+    set ADD_IN_LIST(value) {
+        this._ADD_IN_LIST = value;
     }
 }

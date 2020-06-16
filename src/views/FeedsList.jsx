@@ -39,26 +39,29 @@ const DateFeedsGroup = styled.div`
  * @returns {*|boolean|*[]}
  * @constructor
  */
-const FeedsListGroup = ({ data }) =>
-    data &&
-    Object.entries(data).length > 0 &&
-    Object.entries(data).map(([date, group], kGroup) => (
-        <Col key={`col-group-${kGroup}`}>
-            <>
-                <DateFeedsGroup>
-                    {date && convertDate(date)}
-                </DateFeedsGroup>
-                {group.map((feed, kFeed) => (
-                    <Row key={`row-group-${kFeed}`}>
-                        <Feed feed={feed} />
-                    </Row>
-                ))}
-            </>
-        </Col>
-    ));
+const FeedsListGroup = ({ data }) => {
+    const feeds = data ? groupFeedByDay(data) : {};
+    return feeds ?
+        Object.entries(feeds).length > 0 &&
+        Object.entries(feeds).map(([date, group], kGroup) => (
+            <Col key={`col-group-${kGroup}`}>
+                <>
+                    <DateFeedsGroup>
+                        {date && convertDate(date)}
+                    </DateFeedsGroup>
+                    {group.map((feed, kFeed) => (
+                        <Row key={`row-group-${kFeed}`}>
+                            <Feed feed={feed} />
+                        </Row>
+                    ))}
+                </>
+            </Col>
+        )) : null;
+};
+
 
 FeedsListGroup.propTypes = {
-    data: PropTypes.shape({}),
+    data: PropTypes.arrayOf(PropTypes.shape({})),
 };
 
 FeedsListGroup.defaultProps = {
@@ -70,13 +73,25 @@ FeedsListGroup.defaultProps = {
  */
 class FeedsList extends Component {
     componentDidMount() {
+        const { handleScroll } = this;
         const { getAllFeeds } = this.props;
         getAllFeeds();
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
     }
+
+    handleScroll = () => {
+        const { addInListFeeds, feedsList: { metaData } } = this.props;
+        const { scrollTop, offsetHeight } = document.documentElement;
+        const { innerHeight } = window;
+        if (innerHeight + scrollTop === offsetHeight)  {
+            metaData && addInListFeeds({ skip: metaData.skip + 1 });
+        }
+    };
 
     render() {
         const { feedsList: { data, isFetching } } = this.props;
-        const feedsGroupByDay = groupFeedByDay(data);
+
         return (
             <Suspense fallback={ <Loading /> }>
                 {isFetching
@@ -86,7 +101,7 @@ class FeedsList extends Component {
                             <FeedsListContainer>
                                 { data && data.length > 0 ? (
                                     <Col size={1}>
-                                        { feedsGroupByDay && <FeedsListGroup data={feedsGroupByDay} /> }
+                                        <FeedsListGroup data={data} />
                                     </Col>
                                 ) : <p>No data</p> }
                             </FeedsListContainer>
@@ -103,6 +118,7 @@ FeedsList.propTypes = {
         data: PropTypes.arrayOf(PropTypes.shape({})),
     }),
     getAllFeeds: PropTypes.func,
+    addInListFeeds: PropTypes.func,
 };
 
 const mapStateToProps = state => ({
@@ -111,6 +127,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     getAllFeeds: payload => dispatch(feedsActions.GET_ALL(payload)),
+    addInListFeeds: payload => dispatch(feedsActions.ADD_IN_LIST(payload)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(FeedsList)
