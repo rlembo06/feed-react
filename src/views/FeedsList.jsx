@@ -4,7 +4,7 @@ import ActionsGenericStore from 'store/generic/actions.generic.store'
 
 import styled from "styled-components";
 import { Col, Row } from "components/Grid";
-import Loading from "components/Loading/Loading";
+import { Loading } from "components/Loading";
 import { groupFeedByDay, convertDate } from 'helpers/feedValueConverters.helper';
 import colors from 'constants/colors.constant';
 import PropTypes from "prop-types";
