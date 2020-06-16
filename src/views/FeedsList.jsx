@@ -59,7 +59,6 @@ const FeedsListGroup = ({ data }) => {
         )) : null;
 };
 
-
 FeedsListGroup.propTypes = {
     data: PropTypes.arrayOf(PropTypes.shape({})),
 };
@@ -72,6 +71,10 @@ FeedsListGroup.defaultProps = {
  * Feeds list container, with Loading component.
  */
 class FeedsList extends Component {
+    state = {
+        isLoadNewData: false,
+    };
+
     componentDidMount() {
         const { handleScroll } = this;
         const { getAllFeeds } = this.props;
@@ -80,16 +83,33 @@ class FeedsList extends Component {
         return () => window.removeEventListener('scroll', handleScroll);
     }
 
+    componentDidUpdate(prevProps) {
+        const { handleLoadingInBottom } = this;
+        handleLoadingInBottom();
+    }
+
+    handleLoadingInBottom = () => {
+        const { isLoadNewData } = this.state;
+
+        if(isLoadNewData) {
+            setTimeout(() =>
+                this.setState({ isLoadNewData: false }),
+                1500)
+        }
+    };
+
     handleScroll = () => {
         const { addInListFeeds, feedsList: { metaData } } = this.props;
         const { scrollTop, offsetHeight } = document.documentElement;
         const { innerHeight } = window;
         if (innerHeight + scrollTop === offsetHeight)  {
             metaData && addInListFeeds({ skip: metaData.skip + 1 });
+            this.setState({ isLoadNewData: true })
         }
     };
 
     render() {
+        const { isLoadNewData } = this.state;
         const { feedsList: { data, isFetching } } = this.props;
         return (
             <Suspense fallback={ <Loading /> }>
@@ -101,6 +121,7 @@ class FeedsList extends Component {
                                 { data && data.length > 0 ? (
                                     <Col size={1}>
                                         <FeedsListGroup data={data} />
+                                        { isLoadNewData && <Loading atBottom={true} /> }
                                     </Col>
                                 ) : <p>No data</p> }
                             </FeedsListContainer>

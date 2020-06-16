@@ -43,7 +43,6 @@ export default class WorkflowGenericStore {
             const { results: newData, metaData } = response.data;
             const data = yield select(state => state[moduleName].list.data);
             const list = data.concat(newData);
-            console.log('addInList / list: ', list)
             yield put(actions.SET_LIST({
                 data: list,
                 metaData,
