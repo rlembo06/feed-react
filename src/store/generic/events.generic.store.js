@@ -9,6 +9,7 @@ const GenericEvents = moduleName => ({
     ADD: `@${moduleName}/ADD`,
     REMOVE: `@${moduleName}/REMOVE`,
     CLEAR: `@${moduleName}/CLEAR`,
+    ADD_IN_LIST: `@${moduleName}/ADD_IN_LIST`,
 });
 
 export default GenericEvents;

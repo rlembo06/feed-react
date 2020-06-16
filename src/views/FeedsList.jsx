@@ -4,7 +4,7 @@ import ActionsGenericStore from 'store/generic/actions.generic.store'
 
 import styled from "styled-components";
 import { Col, Row } from "components/Grid";
-import Loading from "components/Loading/Loading";
+import { Loading } from "components/Loading";
 import { groupFeedByDay, convertDate } from 'helpers/feedValueConverters.helper';
 import colors from 'constants/colors.constant';
 import PropTypes from "prop-types";
@@ -39,26 +39,28 @@ const DateFeedsGroup = styled.div`
  * @returns {*|boolean|*[]}
  * @constructor
  */
-const FeedsListGroup = ({ data }) =>
-    data &&
-    Object.entries(data).length > 0 &&
-    Object.entries(data).map(([date, group], kGroup) => (
-        <Col key={`col-group-${kGroup}`}>
-            <>
-                <DateFeedsGroup>
-                    {date && convertDate(date)}
-                </DateFeedsGroup>
-                {group.map((feed, kFeed) => (
-                    <Row key={`row-group-${kFeed}`}>
-                        <Feed feed={feed} />
-                    </Row>
-                ))}
-            </>
-        </Col>
-    ));
+const FeedsListGroup = ({ data }) => {
+    const feeds = data ? groupFeedByDay(data) : {};
+    return feeds ?
+        Object.entries(feeds).length > 0 &&
+        Object.entries(feeds).map(([date, group], kGroup) => (
+            <Col key={`col-group-${kGroup}`}>
+                <>
+                    <DateFeedsGroup>
+                        {date && convertDate(date)}
+                    </DateFeedsGroup>
+                    {group.map((feed, kFeed) => (
+                        <Row key={`row-group-${kFeed}`}>
+                            <Feed feed={feed} />
+                        </Row>
+                    ))}
+                </>
+            </Col>
+        )) : null;
+};
 
 FeedsListGroup.propTypes = {
-    data: PropTypes.shape({}),
+    data: PropTypes.arrayOf(PropTypes.shape({})),
 };
 
 FeedsListGroup.defaultProps = {
@@ -69,14 +71,46 @@ FeedsListGroup.defaultProps = {
  * Feeds list container, with Loading component.
  */
 class FeedsList extends Component {
+    state = {
+        isLoadNewData: false,
+    };
+
     componentDidMount() {
+        const { handleScroll } = this;
         const { getAllFeeds } = this.props;
         getAllFeeds();
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
     }
 
+    componentDidUpdate(prevProps) {
+        const { handleLoadingInBottom } = this;
+        handleLoadingInBottom();
+    }
+
+    handleLoadingInBottom = () => {
+        const { isLoadNewData } = this.state;
+
+        if(isLoadNewData) {
+            setTimeout(() =>
+                this.setState({ isLoadNewData: false }),
+                1500)
+        }
+    };
+
+    handleScroll = () => {
+        const { addInListFeeds, feedsList: { metaData } } = this.props;
+        const { scrollTop, offsetHeight } = document.documentElement;
+        const { innerHeight } = window;
+        if (innerHeight + scrollTop === offsetHeight)  {
+            metaData && addInListFeeds({ skip: metaData.skip + 1 });
+            this.setState({ isLoadNewData: true })
+        }
+    };
+
     render() {
+        const { isLoadNewData } = this.state;
         const { feedsList: { data, isFetching } } = this.props;
-        const feedsGroupByDay = groupFeedByDay(data);
         return (
             <Suspense fallback={ <Loading /> }>
                 {isFetching
@@ -86,7 +120,8 @@ class FeedsList extends Component {
                             <FeedsListContainer>
                                 { data && data.length > 0 ? (
                                     <Col size={1}>
-                                        { feedsGroupByDay && <FeedsListGroup data={feedsGroupByDay} /> }
+                                        <FeedsListGroup data={data} />
+                                        { isLoadNewData && <Loading atBottom={true} /> }
                                     </Col>
                                 ) : <p>No data</p> }
                             </FeedsListContainer>
@@ -103,6 +138,7 @@ FeedsList.propTypes = {
         data: PropTypes.arrayOf(PropTypes.shape({})),
     }),
     getAllFeeds: PropTypes.func,
+    addInListFeeds: PropTypes.func,
 };
 
 const mapStateToProps = state => ({
@@ -111,6 +147,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     getAllFeeds: payload => dispatch(feedsActions.GET_ALL(payload)),
+    addInListFeeds: payload => dispatch(feedsActions.ADD_IN_LIST(payload)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(FeedsList)
