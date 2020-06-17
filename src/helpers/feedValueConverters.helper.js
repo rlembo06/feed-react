@@ -2,7 +2,7 @@ import _ from 'lodash';
 import moment from 'moment';
 import { feedTypes, feedUnits } from 'constants/feed.constant';
 
-const convertSeconds = value => {
+export const convertSeconds = value => {
     if(value) {
         const hrs = Math.floor(value / 3600);
         const min = Math.floor((value - (hrs * 3600)) / 60);

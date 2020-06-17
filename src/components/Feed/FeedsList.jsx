@@ -34,7 +34,7 @@ const DateFeedsGroup = styled.div`
  * @returns {*|boolean|*[]}
  * @constructor
  */
-const FeedsListGroup = ({ data }) => {
+export const FeedsListGroup = ({ data }) => {
     const feeds = data ? groupFeedByDay(data) : {};
     return feeds ?
         Object.entries(feeds).length > 0 &&
@@ -46,7 +46,7 @@ const FeedsListGroup = ({ data }) => {
                     </DateFeedsGroup>
                     {group.map((feed, kFeed) => (
                         <Row key={`row-group-${kFeed}`}>
-                            <Feed feed={feed} />
+                            <Feed id={`feed-${kFeed}`} feed={feed} />
                         </Row>
                     ))}
                 </>
