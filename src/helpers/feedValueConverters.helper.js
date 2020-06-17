@@ -48,13 +48,14 @@ export const convertDate = value => {
     if(!!value) {
         const instanceDate = new Date(value);
         const dayOfDate = instanceDate.getDate();
-        const monthOfDate = instanceDate.getMonth();
+        const monthOfDate = instanceDate.getMonth() + 1;
         const yearOfDate = instanceDate.getFullYear();
 
         const instanceToday = new Date();
         const dayOfToday = instanceToday.getDate();
-        const monthOfToday = instanceToday.getMonth();
+        const monthOfToday = instanceToday.getMonth() + 1;
         const yearOfToday = instanceToday.getFullYear();
+
 
         if( dayOfToday === dayOfDate &&
             monthOfToday === monthOfDate &&
