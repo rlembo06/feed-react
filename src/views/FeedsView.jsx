@@ -44,8 +44,10 @@ class FeedsView extends Component {
         const { addInListFeeds, feedsList: { metaData } } = this.props;
         const { scrollTop, offsetHeight } = document.documentElement;
         const { innerHeight } = window;
+
+        // If scroll down
         if (innerHeight + scrollTop === offsetHeight)  {
-            metaData && addInListFeeds({ skip: metaData.skip + 1 });
+            metaData && addInListFeeds({ skip: metaData.skip + 30 });
             this.setState({ isLoadNewData: true })
         }
     };

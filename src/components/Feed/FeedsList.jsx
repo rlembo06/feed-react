@@ -51,7 +51,7 @@ const FeedsListGroup = ({ data }) => {
                     ))}
                 </>
             </Col>
-        )) : null;
+        )) : <></>;
 };
 
 FeedsListGroup.propTypes = {

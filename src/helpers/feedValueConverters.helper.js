@@ -28,6 +28,11 @@ export const getFeedValueByType = feed => {
             const duration = feed && convertSeconds(feed.duration);
             return `${distance} ${feedUnits.KM} - ${duration}`
         }
+        if(feed && feed.distance && feed.duration) {
+            const distance = feed && (feed.distance / 1000).toFixed(2);
+            const duration = feed && convertSeconds(feed.duration);
+            return `${distance} ${feedUnits.KM} - ${duration}`
+        }
     }
 };
 

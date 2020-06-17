@@ -90,6 +90,6 @@ export const mockResponse = {
 
 export default {
     getAll: () => new Promise((resolve, reject) => {
-        resolve(mockData)
+        resolve(mockResponse)
     })
 }

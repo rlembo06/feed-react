@@ -40,7 +40,7 @@ const FeedValue = styled.div`
  */
 const Feed = ({ feed: { type, points }, feed }) => {
     const icon = feed && feedIcons[type.toUpperCase()];
-    const title = feed && feedNames[type.toUpperCase()];
+    const title = feed && feedNames[type.toUpperCase()] ? feedNames[type.toUpperCase()] : type;
     const valueParsed = feed && getFeedValueByType(feed);
     return (
         <Card>
