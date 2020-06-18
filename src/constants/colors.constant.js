@@ -1,5 +1,5 @@
 export default {
-    BLUE_PALE: '#c8cefc',
+    BLUE_PALE: '#dce2fc',
     BLUE_LIGHT: '#63a4c7',
     BLUE_DEEP: '#637fc7',
     GREY_LIGHT: '#bdbdbd',

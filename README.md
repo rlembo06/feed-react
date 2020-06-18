@@ -1,4 +1,5 @@
 # Sport Heroes - Test front-end
+Par Romain LEMBO
 
 ## Requirements
 
@@ -35,6 +36,11 @@ Grâce au call API documenté dans `App.js`, créer un feed d'activités simple 
 
 ### Bonus : 
 
-- 🚀 Créer une pagination (par un lien simple ou un infinite scroll) pour voir les activités antérieures.
+- 🚀 Créer une pagination (par un lien simple ou un infinite scroll) pour voir les activités antérieures : 
+    - Infinite scroll ajouté.
 - 🤔 Que faire dans ce fichier `App.test.js` ? 
+    - Tests ajoutés pour ce fichier
+    - Egalement des tests unitaires pour fonctions et components.
 - 🛍️ Et Redux dans tout ça ? 
+    - Store Redux Generic implémenté (avec ses tests unitaires).
+
