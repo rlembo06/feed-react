@@ -6,10 +6,10 @@ import Apis from 'api/modules';
 
 // importations of modules :
 import { GenericModule } from './generic';
-import { GenericModelState, GenericReducers, GenericActions } from 'store/generic';
+import { GenericModelState, GenericReducers } from 'store/generic';
 
 const rootReducer = combineReducers({
-    feeds: new GenericModule('feeds', new GenericModelState(), new GenericReducers('feeds', GenericActions)).getReducers(),
+    feeds: new GenericModule('feeds', new GenericModelState(), new GenericReducers('feeds')).getReducers(),
 });
 
 const sagaMiddleware = createSagaMiddleware();
