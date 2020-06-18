@@ -33,16 +33,15 @@ const FeedValue = styled.div`
 /**
  * Component used as Feed item
  * @param type Type feed as title
- * @param value Value feed, like distance or time
  * @param points Points earned through the activity.
- * @param credits Corresponding credits (1 credit = 5 points)
+ * @param feed Feed object
  * @returns {*}
  * @constructor
  */
-const Feed = ({ feed: { type, value, points }, feed }) => {
-    const icon = type && feedIcons[type.toUpperCase()];
-    const title = type && feedNames[type.toUpperCase()];
-    const valueParsed = getFeedValueByType(feed);
+const Feed = ({ feed: { type, points }, feed }) => {
+    const icon = feed && feedIcons[type.toUpperCase()];
+    const title = feed && feedNames[type.toUpperCase()] ? feedNames[type.toUpperCase()] : type;
+    const valueParsed = feed && getFeedValueByType(feed);
     return (
         <Card>
             <Row>

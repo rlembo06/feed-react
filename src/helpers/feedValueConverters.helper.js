@@ -2,7 +2,7 @@ import _ from 'lodash';
 import moment from 'moment';
 import { feedTypes, feedUnits } from 'constants/feed.constant';
 
-const convertSeconds = value => {
+export const convertSeconds = value => {
     if(value) {
         const hrs = Math.floor(value / 3600);
         const min = Math.floor((value - (hrs * 3600)) / 60);
@@ -28,6 +28,11 @@ export const getFeedValueByType = feed => {
             const duration = feed && convertSeconds(feed.duration);
             return `${distance} ${feedUnits.KM} - ${duration}`
         }
+        if(feed && feed.distance && feed.duration) {
+            const distance = feed && (feed.distance / 1000).toFixed(2);
+            const duration = feed && convertSeconds(feed.duration);
+            return `${distance} ${feedUnits.KM} - ${duration}`
+        }
     }
 };
 
@@ -43,13 +48,14 @@ export const convertDate = value => {
     if(!!value) {
         const instanceDate = new Date(value);
         const dayOfDate = instanceDate.getDate();
-        const monthOfDate = instanceDate.getMonth();
+        const monthOfDate = instanceDate.getMonth() + 1;
         const yearOfDate = instanceDate.getFullYear();
 
         const instanceToday = new Date();
         const dayOfToday = instanceToday.getDate();
-        const monthOfToday = instanceToday.getMonth();
+        const monthOfToday = instanceToday.getMonth() + 1;
         const yearOfToday = instanceToday.getFullYear();
+
 
         if( dayOfToday === dayOfDate &&
             monthOfToday === monthOfDate &&
